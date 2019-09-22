@@ -2,13 +2,14 @@ from netmiko import ConnectHandler
 from operator import itemgetter
 from getpass import getpass
 import readline
+import re
 
 NETDEVICE1 = {
 #    'ip': input("Enter device IP: "),
     'username': 'root',
 #    'password': getpass(),
-     'ip': '192.168.0.10',
-     'password': 'cisco',
+    'ip': '192.168.0.10',
+    'password': 'cisco',
     'device_type': 'cisco_ios',
 }
 
@@ -28,3 +29,6 @@ l = len(output2)
 for i in range(0,l):
     if output2[i]['port'] == int and output2[i]['descrip'] != string:
         print ("Interface's description: " + output[i]['descrip'])
+
+output3 = net_connect.send_command('show run interface ' + int, use_textfsm=True)
+print ('\n---------------------------------------\n\n' + output3 + '\n---------------------------------------\n')
