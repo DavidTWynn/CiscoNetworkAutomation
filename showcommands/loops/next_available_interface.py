@@ -2,7 +2,6 @@ from netmiko import ConnectHandler
 from operator import itemgetter
 from getpass import getpass
 import readline
-import re
 
 NETDEVICE1 = {
 #    'ip': input("Enter device IP: "),
@@ -32,3 +31,10 @@ for i in range(0,l):
 
 output3 = net_connect.send_command('show run interface ' + int, use_textfsm=True)
 print ('\n---------------------------------------\n\n' + output3 + '\n---------------------------------------\n')
+
+output4= net_connect.send_command('show interface switchport', use_textfsm=True)
+l = len(output4)
+for i in range(0,l):
+    if output4[i]['interface'] == int:
+        print (output4[i]['access_vlan'])
+
